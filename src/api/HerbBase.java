@@ -1,5 +1,5 @@
 
-package herb;
+package api;
 
 /**
  * Provides a base class for programs built for Herb the wonder robot.
@@ -7,10 +7,10 @@ package herb;
  */
 public abstract class HerbBase {
     
-
-    private static class EventProcessorThread {
-        
-    }
+    
+    
+    
+    
 }
 
 
