@@ -7,8 +7,7 @@ package api;
  * @author Jacob
  */
 public interface Scheduler extends Runnable {
-    static final Schedule schedule = HerbBase.getSchedule();
-    long refreshTime = 100;
+    public static final boolean BLOCKING = true;
     /**
      * How long to wait until {@code process} is called again
      * @return 
@@ -20,6 +19,12 @@ public interface Scheduler extends Runnable {
      * instance the next time it processes an event for it.
      */
     public boolean forget();
+    
+    /**
+     * return True if the master schedule should skip calling {@code run} if it
+     * won't be executed on time.
+     */
+    public boolean skipLate();
     
     /**
      * The method that's called when a scheduled event is ready.
