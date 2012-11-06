@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package api;
 
 /**
@@ -9,6 +6,14 @@ package api;
  * @author Jacob
  */
 public interface Schedule {
-    public void addScheduled(Scheduler s);
-    public void removeScheduled(Scheduler s);
+    /**
+     * Adds a Scheduler to this Schedule.
+     * @param s The scheduler to add.
+     */
+    public void addScheduler(Scheduler s);
+    /**
+     * Removes a Scheduler from this Schedule.
+     * @param s The scheduler to remove.
+     */
+    public void removeScheduler(Scheduler s);
 }

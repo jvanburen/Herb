@@ -9,10 +9,10 @@ package api;
 public interface Scheduler extends Runnable {
     public static final boolean BLOCKING = true;
     /**
-     * How long to wait until {@code process} is called again
+     * At what time {@code run} is called again
      * @return 
      */
-    public long refreshTime();
+    public long callTime();
     
     /**
      * If this method returns true, the event scheduler will forget this
