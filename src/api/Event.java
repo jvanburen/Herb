@@ -6,7 +6,7 @@ package api;
  * capabilities.
  * @author Jacob
  */
-public interface Scheduler extends Runnable {
+public interface Event extends Runnable {
     public static final boolean BLOCKING = true;
     /**
      * At what time {@code run} is called again

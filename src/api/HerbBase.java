@@ -9,13 +9,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * Provides a base class for programs built for Herb the wonder robot.
  * @author Jacob
  */
-public abstract class HerbBase implements Schedule {
+public abstract class HerbBase {
     private static final MasterSchedule schedule = new MasterSchedule();
     private static final EventQueue eq = new EventQueue();
     private static final Lock scheduleLock = new ReentrantLock();
     
-    @Override
-    public final void addScheduler(Scheduler s) {
+    public final void addScheduler(api.Event s) {
         scheduleLock.lock();
         try {
             eq.put(new Event(s));
@@ -24,8 +23,7 @@ public abstract class HerbBase implements Schedule {
         }
     }
 
-    @Override
-    public final void removeScheduler(Scheduler s) {
+    public final void removeScheduler(api.Event s) {
         scheduleLock.lock();
         try {
             eq.deleteScheduler(s);
@@ -35,12 +33,12 @@ public abstract class HerbBase implements Schedule {
     }
 
     private static class Event {
-        /** The {@code Scheduler} Object that this event was created from. */
-        private final Scheduler handler;
+        /** The {@code Event} Object that this event was created from. */
+        private final api.Event handler;
         /** The time at which this handler's run method should be called. */ 
         private final long time;
 
-        public Event(Scheduler handler) {
+        public Event(api.Event handler) {
             if (handler == null)
                 throw new NullPointerException("Cannot pass a null handler");
             this.handler = handler;
@@ -99,7 +97,7 @@ public abstract class HerbBase implements Schedule {
                         }
                         eq.processLockedMin();
                         if (!e.handler.skipLate() || onTime) {
-                            if (Scheduler.BLOCKING)
+                            if (api.Event.BLOCKING)
                                 e.handler.run();
                             else
                                 new Thread(handlerThreads,
@@ -224,7 +222,7 @@ public abstract class HerbBase implements Schedule {
             }
         }
 
-        public void deleteScheduler(Scheduler s) {
+        public void deleteScheduler(api.Event s) {
             arrayLock.lock();
             try {
                 for (int i = 1; i < N; ++i) {

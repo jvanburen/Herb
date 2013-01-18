@@ -5,7 +5,7 @@ package api;
  *
  * @author Jacob
  */
-public class Test extends HerbBase implements Scheduler {
+public class Test extends HerbBase implements Event {
     static long count = 0;
     long wait;
     
@@ -40,9 +40,13 @@ public class Test extends HerbBase implements Scheduler {
     }
     
     public static void main(String[] args) {
+        System.out.println((int)Float.POSITIVE_INFINITY);
+        System.out.println((int)Float.NaN);
+        System.out.println(Float.NaN == Float.NaN);
+
         HerbBase base = new Test(0);
-        Scheduler s = new Test(200);
-        Scheduler t = new Test(333);
+        Event s = new Test(200);
+        Event t = new Test(333);
         base.addScheduler(s);
         base.addScheduler(t);
         while (System.currentTimeMillis() > 0);

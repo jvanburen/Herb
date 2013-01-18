@@ -14,12 +14,14 @@ import lejos.robotics.navigation.SegowayPilot;
  *
  * @author Jacob
  */
-public class HerbTwo {
+public class RHerbTwo {
 
     public static final boolean DEBUG = true;
     public static final int RIGHT = -1, LEFT = 1;
-    public static final double WHEEL_CIRCUMFERENCE = 14; // cm
-    public static final double WHEEL_DIAMETER = WHEEL_CIRCUMFERENCE / Math.PI; //cm
+    public static final double WHEEL_CIRCUMFERENCE = 26; // cm
+    public static final double GEAR_RATIO = 4;
+    public static final double WHEEL_DIAMETER 
+            = WHEEL_CIRCUMFERENCE * GEAR_RATIO / Math.PI; //cm
     public static final int SERVO_STRENGTH = 900;
     public static final int MOVE_DELAY = 500; //ms
     public static final int DETECT_DISTANCE = 60; //cm
@@ -172,8 +174,8 @@ public class HerbTwo {
         RIGHT_MOTOR.setSpeed(SERVO_STRENGTH);
 
         GYRO_CONTROLLER = new SegowayPilot(
-                LEFT_ENCODER_MOTOR,
                 RIGHT_ENCODER_MOTOR,
+                LEFT_ENCODER_MOTOR,
                 GYRO_SENSOR,
                 WHEEL_DIAMETER,
                 10e2);
